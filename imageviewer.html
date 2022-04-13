@@ -1,43 +1,56 @@
 <!DOCTYPE html>
-<html>  
-<body>
-<h1>Image Viewer</h1>
-<h3>Author: Deanna Nguyen</h3>
+<html>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<h1 style = "text-align:center">Image Viewer</h2>
 
-<script type = "text/javascript">
-  //https://www.geeksforgeeks.org/how-to-zoom-in-and-zoom-out-image-using-javascript/
-  //https://stackoverflow.com/questions/47635341/zooming-in-out-an-image-by-clicking-zoom-buttons-javascript
-    
-  function zoom() {
-    var imgr = document.getElementByID("image");
-    var width = imgr.clientWidth;
-    imgr.style.width = (width + 100)+"px";
-  }
+
+<!--Placeholder image here for demonstration purposes-->
+<img id="test" img src="150.png" style="text-align:center">
+
+
+<!--https://www.w3schools.com/howto/howto_css_modal_images.asp-->
+<div id="myModal" class="modal" style ="display:none; background-color: black;">
+  <span class = "close">&times; </span>
   
-  function out(){
-    var imgr = document.getElementByID("image");
-    var width = imgr.clientWidth;
-    imgr.style.width = (width - 100)+"px";
-  }
+  <!-- Modal Content(The Image)-->
+  <img class="modal-content" id="modal_test" 
+  style ="display:block;
+  animation-name: zoom; 
+  animation-duration: 0.6s;">
 
-</script>
-
-
-<button type="button" onclick = "zoom()">
-Zoom in
-</button>
-
-<button type="button" onclick = "out()">
-  Zoom out
-</button>
-
-<!--https://www.w3schools.com/howto/howto_js_lightbox.asp-->
-<!--https://placeholder.com/#How_To_Use_Our_Placeholders-->
-<div class="main">
-  <img id="image" src="https://via.placeholder.com/150">
+  <div id="caption"></div>
 </div>
 
+<script>
+
+  var modal = document.getElementByID("myModal");
+  // image itself
+  var img = document.getElementByID("test");
+  ///get modal
+  var modal_img = document.getElementByID("modal_test");
+
+  //get caption
+  var caption = document.getElementById("caption");
+
+  //insert image inside modal on clic
+  img.onclick = function(){
+    modal.style.display = "block"; // display the block
+    //get source image
+    modal_img.src = this.src;
+    caption.innerHTML = this.alt; // get caption
+  }
+
+  //Get the <span> element that closes modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // close modal
+  span.onclick = function() {
+    //https://www.w3schools.com/css/css_display_visibility.asp
+    modal.style.display = "none"; 
+  }
+
+
+</script>
+    
 </body>
-
-
 </html>
